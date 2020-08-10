@@ -1,0 +1,24 @@
+version: 0.0
+os: linux
+files:
+  - source: /builds
+    destination: /tch/s3_bucket/builds
+  - source: /configs
+    destination: /tch/s3_bucket/configs
+hooks:
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: scripts/backup_old_build.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/copy_latest_build.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root

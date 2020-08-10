@@ -1,0 +1,12 @@
+#!/bin/ksh
+#HOST_IP=ifconfig | grep -i "inet" | grep -v "127.0.0.1" | awk -F ' ' '{print $2}'
+#sh /root/jboss/bin/jboss-cli.sh --connect --controller=$HOST_IP:9999 command="/host=$hostname:shutdown"
+
+sh /root/jboss.sh stop
+
+Jboss_not_running="JBoss is not running on this machine!"
+JbossCount=`sh /root/jboss.sh status`
+echo JbossCount=$JbossCount 
+echo Jboss_not_running=$Jboss_not_running
+
+ 
